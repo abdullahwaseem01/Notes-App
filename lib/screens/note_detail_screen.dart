@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 
+import 'add_note_screen.dart';
+
 class NoteDetailScreen extends StatelessWidget {
   final int index;
   NoteDetailScreen({
@@ -17,17 +19,24 @@ class NoteDetailScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-              onPressed: () {
-                try {
-                  _notes.deleteAt(index);
-                  Navigator.pop(context);
-                } catch (e) {
-                  print(e);
-                }
-              },
-              icon: Icon(
-                Icons.delete_outline,
-              ))
+            onPressed: () {
+              try {
+                _notes.deleteAt(index);
+                Navigator.pop(context);
+              } catch (e) {
+                print(e);
+              }
+            },
+            icon: Icon(
+              Icons.delete_outline,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: IconButton(
+                onPressed: () => Navigator.pushNamed(context, AddNoteScreen.id),
+                icon: Icon(Icons.edit)),
+          )
         ],
       ),
       body: SingleChildScrollView(
